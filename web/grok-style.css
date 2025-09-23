@@ -1,0 +1,140 @@
+body {
+    margin: 0;
+    overflow: hidden; /* 防止滚动条出现 */
+    background-color: #000000; /* 纯黑色背景 */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #fff;
+    cursor: default; /* 默认光标样式 */
+}
+
+/* WebGL Canvas 容器 */
+#webgl-container {
+    position: fixed; /* 固定在视口 */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* 确保在其他内容之下 */
+}
+
+/* Grok 标题文字 */
+#grok-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 居中 */
+    font-size: 16vw; /* 响应式字体大小 */
+    font-weight: 900; /* 超粗体 */
+    letter-spacing: -0.04em; /* 微调字间距 */
+    white-space: nowrap; /* 防止 Grok 换行 */
+    pointer-events: none; /* 确保鼠标事件穿透到背景 */
+    user-select: none; /* 禁止选中文字 */
+}
+
+.grok-fade {
+    color: rgba(140, 150, 160, 0.85); /* "Kyber " 部分 - 更柔和的蓝灰色，与烟雾融合 */
+    text-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.4), /* 微妙的底部阴影 */
+        0 0 12px rgba(120, 160, 200, 0.3); /* 蓝色光晕，与烟雾呼应 */
+}
+
+.grok-shine {
+    color: rgba(140, 150, 160, 0.85); /* "Core" 部分 - 与"Kyber "保持一致 */
+    text-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.4), /* 微妙的底部阴影 */
+        0 0 12px rgba(120, 160, 200, 0.3); /* 蓝色光晕，与烟雾呼应 */
+}
+
+/* 底部输入框容器 */
+#chat-input-container {
+    position: absolute;
+    bottom: 40px; /* 距离底部 40px */
+    left: 50%;
+    transform: translateX(-50%); /* 水平居中 */
+    width: 90%;
+    max-width: 800px; /* 更大的最大宽度 */
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+    background-color: rgba(20, 20, 20, 0.9); /* 更深的背景色 */
+    border-radius: 16px; /* 更大的圆角 */
+    border: 1px solid rgba(60, 60, 60, 0.3); /* 添加边框 */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7); /* 更强的阴影 */
+    transition: box-shadow 0.3s ease-in-out; /* 阴影过渡动画 */
+}
+
+#chat-input-container:focus-within { /* 当子元素获得焦点时 */
+    box-shadow: 0 0 15px rgba(135, 206, 250, 0.5), /* 焦点时发光 */
+                0 0 30px rgba(135, 206, 250, 0.2);
+}
+
+#chat-input {
+    flex-grow: 1; /* 占据剩余空间 */
+    border: none;
+    background: none;
+    color: #ffffff;
+    font-size: 1.1em;
+    padding: 0;
+    margin-right: 15px; /* 与发送按钮的间距 */
+    outline: none; /* 移除焦点边框 */
+}
+
+#chat-input::placeholder {
+    color: #aaaaaa;
+    opacity: 0.8;
+}
+
+#send-button {
+    width: 32px;
+    height: 32px;
+    background-color: rgba(100, 100, 100, 0.4); /* 灰色半透明 */
+    border-radius: 50%; /* 圆形 */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease-in-out;
+    position: relative;
+}
+
+#send-button:hover {
+    background-color: rgba(150, 150, 150, 0.6); /* 鼠标悬停时变亮 */
+}
+
+/* 添加向上箭头图标 */
+#send-button::before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 8px solid #ffffff;
+    transform: translateY(-1px);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    #grok-title {
+        font-size: 20vw; /* 移动设备上更大的字体 */
+    }
+    
+    #chat-input-container {
+        width: 90%;
+        bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    #grok-title {
+        font-size: 24vw;
+    }
+    
+    #chat-input-container {
+        width: 95%;
+        padding: 10px 16px;
+    }
+    
+    #chat-input {
+        font-size: 1em;
+    }
+}

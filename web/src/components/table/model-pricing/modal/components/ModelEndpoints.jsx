@@ -18,8 +18,8 @@ For commercial licensing, please contact support@quantumnous.com
 */
 
 import React from 'react';
-import { Card, Avatar, Typography, Badge } from '@douyinfe/semi-ui';
-import { IconLink } from '@douyinfe/semi-icons';
+import { Card, Typography, Badge } from '@douyinfe/semi-ui';
+import { Link as LinkIcon } from 'lucide-react';
 
 const { Text } = Typography;
 
@@ -62,17 +62,22 @@ const ModelEndpoints = ({ modelData, endpointMap = {}, t }) => {
   };
 
   return (
-    <Card className='!rounded-2xl shadow-sm border-0 mb-6'>
-      <div className='flex items-center mb-4'>
-        <Avatar size='small' color='purple' className='mr-2 shadow-md'>
-          <IconLink size={16} />
-        </Avatar>
-        <div>
-          <Text className='text-lg font-medium'>{t('API端点')}</Text>
-          <div className='text-xs text-gray-600'>
-            {t('模型支持的接口端点信息')}
+    <Card className='!rounded-xl !shadow-none !border' style={{ borderColor: 'rgba(0,0,0,0.06)' }}>
+      <div className='mb-3'>
+        <div className='flex items-center gap-2 mb-1'>
+          <div
+            className='w-6 h-6 rounded-full flex items-center justify-center'
+            style={{
+              background:
+                'linear-gradient(135deg, rgba(16,185,129,0.15) 0%, rgba(34,197,94,0.15) 100%)',
+              border: '1px solid rgba(0,0,0,0.06)'
+            }}
+          >
+            <LinkIcon size={14} className='text-emerald-500' />
           </div>
+          <Text className='text-base font-semibold'>{t('API端点')}</Text>
         </div>
+        <div className='text-xs text-gray-500'>{t('模型支持的接口端点信息')}</div>
       </div>
       {renderAPIEndpoints()}
     </Card>

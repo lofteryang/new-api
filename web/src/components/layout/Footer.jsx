@@ -188,7 +188,7 @@ const FooterBar = () => {
             </Typography.Text>
           </div>
 
-          <div className='text-sm'>
+          {/* <div className='text-sm'>
             <span className='!text-semi-color-text-1'>
               {t('设计与开发由')}{' '}
             </span>
@@ -209,7 +209,7 @@ const FooterBar = () => {
             >
               One API
             </a>
-          </div>
+          </div> */}
         </div>
       </footer>
     ),

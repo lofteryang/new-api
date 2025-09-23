@@ -36,18 +36,6 @@ const PricingDisplaySettings = ({
 }) => {
   const items = [
     {
-      value: 'recharge',
-      label: t('充值价格显示'),
-    },
-    {
-      value: 'ratio',
-      label: t('显示倍率'),
-    },
-    {
-      value: 'tableView',
-      label: t('表格视图'),
-    },
-    {
       value: 'tokenUnit',
       label: t('按K显示单位'),
     },
@@ -59,27 +47,13 @@ const PricingDisplaySettings = ({
   ];
 
   const handleChange = (value) => {
-    switch (value) {
-      case 'recharge':
-        setShowWithRecharge(!showWithRecharge);
-        break;
-      case 'ratio':
-        setShowRatio(!showRatio);
-        break;
-      case 'tableView':
-        setViewMode(viewMode === 'table' ? 'card' : 'table');
-        break;
-      case 'tokenUnit':
-        setTokenUnit(tokenUnit === 'K' ? 'M' : 'K');
-        break;
+    if (value === 'tokenUnit') {
+      setTokenUnit(tokenUnit === 'K' ? 'M' : 'K');
     }
   };
 
   const getActiveValues = () => {
     const activeValues = [];
-    if (showWithRecharge) activeValues.push('recharge');
-    if (showRatio) activeValues.push('ratio');
-    if (viewMode === 'table') activeValues.push('tableView');
     if (tokenUnit === 'K') activeValues.push('tokenUnit');
     return activeValues;
   };
@@ -97,17 +71,7 @@ const PricingDisplaySettings = ({
         t={t}
       />
 
-      {showWithRecharge && (
-        <SelectableButtonGroup
-          title={t('货币单位')}
-          items={currencyItems}
-          activeValue={currency}
-          onChange={setCurrency}
-          collapsible={false}
-          loading={loading}
-          t={t}
-        />
-      )}
+      {/* 精简：移除充值货币单位切换 */}
     </div>
   );
 };

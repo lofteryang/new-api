@@ -18,6 +18,7 @@ For commercial licensing, please contact support@quantumnous.com
 */
 
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { useHeaderBar } from '../../../hooks/common/useHeaderBar';
 import { useNotifications } from '../../../hooks/common/useNotifications';
 import { useNavigation } from '../../../hooks/common/useNavigation';
@@ -28,6 +29,9 @@ import Navigation from './Navigation';
 import ActionButtons from './ActionButtons';
 
 const HeaderBar = ({ onMobileMenuToggle, drawerOpen }) => {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/' || location.pathname === '/home';
+  
   const {
     userState,
     statusState,
@@ -64,8 +68,21 @@ const HeaderBar = ({ onMobileMenuToggle, drawerOpen }) => {
 
   const { mainNavLinks } = useNavigation(t, docsLink, headerNavModules);
 
+  // 根据是否在首页决定文字颜色
+  const headerTextClass = isHomePage 
+    ? 'text-white' 
+    : 'text-semi-color-text-0';
+
   return (
-    <header className='text-semi-color-text-0 sticky top-0 z-50 transition-colors duration-300 bg-white/75 dark:bg-zinc-900/75 backdrop-blur-lg'>
+    <header
+      className={`${headerTextClass} sticky top-0 z-50 transition-colors duration-300 ${isHomePage ? '' : 'border-b'}`}
+      style={{
+        backgroundColor: isHomePage ? 'transparent' : '#ffffff',
+        borderBottomColor: isHomePage ? 'transparent' : 'rgba(0,0,0,0.06)',
+        borderBottomWidth: isHomePage ? 0 : 1,
+        borderBottomStyle: isHomePage ? 'none' : 'solid',
+      }}
+    >
       <NoticeModal
         visible={noticeVisible}
         onClose={handleNoticeClose}
@@ -95,6 +112,7 @@ const HeaderBar = ({ onMobileMenuToggle, drawerOpen }) => {
               systemName={systemName}
               isSelfUseMode={isSelfUseMode}
               isDemoSiteMode={isDemoSiteMode}
+              isHomePage={isHomePage}
               t={t}
             />
           </div>
@@ -105,24 +123,28 @@ const HeaderBar = ({ onMobileMenuToggle, drawerOpen }) => {
             isLoading={isLoading}
             userState={userState}
             pricingRequireAuth={pricingRequireAuth}
+            isHomePage={isHomePage}
           />
 
-          <ActionButtons
-            isNewYear={isNewYear}
-            unreadCount={unreadCount}
-            onNoticeOpen={handleNoticeOpen}
-            theme={theme}
-            onThemeToggle={handleThemeToggle}
-            currentLang={currentLang}
-            onLanguageChange={handleLanguageChange}
-            userState={userState}
-            isLoading={isLoading}
-            isMobile={isMobile}
-            isSelfUseMode={isSelfUseMode}
-            logout={logout}
-            navigate={navigate}
-            t={t}
-          />
+          <div className={isHomePage ? 'mr-4 md:mr-12 lg:mr-[120px] xl:mr-[200px]' : ''}>
+            <ActionButtons
+              isNewYear={isNewYear}
+              unreadCount={unreadCount}
+              onNoticeOpen={handleNoticeOpen}
+              theme={theme}
+              onThemeToggle={handleThemeToggle}
+              currentLang={currentLang}
+              onLanguageChange={handleLanguageChange}
+              userState={userState}
+              isLoading={isLoading}
+              isMobile={isMobile}
+              isSelfUseMode={isSelfUseMode}
+              logout={logout}
+              navigate={navigate}
+              t={t}
+              isHomePage={isHomePage}
+            />
+          </div>
         </div>
       </div>
     </header>

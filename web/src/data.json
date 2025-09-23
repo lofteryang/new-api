@@ -1,0 +1,202 @@
+[
+  {
+    "name": "Sun",
+    "type": "G-type star",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "magnitude": -26.7,
+    "color": "#FFFF00",
+    "size": 3.0
+  },
+  {
+    "name": "Sirius",
+    "type": "A-type star",
+    "x": 150,
+    "y": 50,
+    "z": -80,
+    "magnitude": -1.46,
+    "color": "#87CEEB",
+    "size": 2.5
+  },
+  {
+    "name": "Canopus",
+    "type": "F-type star",
+    "x": -200,
+    "y": -120,
+    "z": 90,
+    "magnitude": -0.74,
+    "color": "#FFF8E1",
+    "size": 2.2
+  },
+  {
+    "name": "Alpha Centauri",
+    "type": "G-type star",
+    "x": 80,
+    "y": -180,
+    "z": -40,
+    "magnitude": -0.27,
+    "color": "#FFFF88",
+    "size": 2.0
+  },
+  {
+    "name": "Arcturus",
+    "type": "K-type star",
+    "x": -250,
+    "y": 200,
+    "z": 120,
+    "magnitude": -0.05,
+    "color": "#FFA500",
+    "size": 2.8
+  },
+  {
+    "name": "Vega",
+    "type": "A-type star",
+    "x": 300,
+    "y": 180,
+    "z": -150,
+    "magnitude": 0.03,
+    "color": "#ADD8E6",
+    "size": 2.1
+  },
+  {
+    "name": "Capella",
+    "type": "G-type star",
+    "x": -180,
+    "y": 250,
+    "z": -200,
+    "magnitude": 0.08,
+    "color": "#FFFF99",
+    "size": 2.4
+  },
+  {
+    "name": "Rigel",
+    "type": "B-type star",
+    "x": 400,
+    "y": -300,
+    "z": 250,
+    "magnitude": 0.13,
+    "color": "#B0C4DE",
+    "size": 3.5
+  },
+  {
+    "name": "Procyon",
+    "type": "F-type star",
+    "x": 120,
+    "y": 100,
+    "z": 80,
+    "magnitude": 0.34,
+    "color": "#F5F5DC",
+    "size": 1.8
+  },
+  {
+    "name": "Achernar",
+    "type": "B-type star",
+    "x": -350,
+    "y": -400,
+    "z": -100,
+    "magnitude": 0.46,
+    "color": "#4169E1",
+    "size": 2.6
+  },
+  {
+    "name": "Betelgeuse",
+    "type": "M-type star",
+    "x": 380,
+    "y": -280,
+    "z": 180,
+    "magnitude": 0.50,
+    "color": "#FF4500",
+    "size": 4.0
+  },
+  {
+    "name": "Hadar",
+    "type": "B-type star",
+    "x": 50,
+    "y": -350,
+    "z": -180,
+    "magnitude": 0.61,
+    "color": "#6495ED",
+    "size": 2.3
+  },
+  {
+    "name": "Altair",
+    "type": "A-type star",
+    "x": 280,
+    "y": 150,
+    "z": -80,
+    "magnitude": 0.77,
+    "color": "#F0F8FF",
+    "size": 1.9
+  },
+  {
+    "name": "Aldebaran",
+    "type": "K-type star",
+    "x": 200,
+    "y": -150,
+    "z": 100,
+    "magnitude": 0.85,
+    "color": "#FF6347",
+    "size": 2.7
+  },
+  {
+    "name": "Spica",
+    "type": "B-type star",
+    "x": -100,
+    "y": -200,
+    "z": 250,
+    "magnitude": 1.04,
+    "color": "#9370DB",
+    "size": 2.2
+  },
+  {
+    "name": "Antares",
+    "type": "M-type star",
+    "x": -150,
+    "y": -300,
+    "z": 200,
+    "magnitude": 1.09,
+    "color": "#DC143C",
+    "size": 3.8
+  },
+  {
+    "name": "Pollux",
+    "type": "K-type star",
+    "x": 180,
+    "y": 80,
+    "z": -120,
+    "magnitude": 1.14,
+    "color": "#FFB347",
+    "size": 2.5
+  },
+  {
+    "name": "Fomalhaut",
+    "type": "A-type star",
+    "x": -280,
+    "y": -100,
+    "z": -300,
+    "magnitude": 1.16,
+    "color": "#E6E6FA",
+    "size": 2.0
+  },
+  {
+    "name": "Deneb",
+    "type": "A-type star",
+    "x": 450,
+    "y": 400,
+    "z": -250,
+    "magnitude": 1.25,
+    "color": "#B0E0E6",
+    "size": 3.2
+  },
+  {
+    "name": "Regulus",
+    "type": "B-type star",
+    "x": 120,
+    "y": -50,
+    "z": 150,
+    "magnitude": 1.35,
+    "color": "#87CEFA",
+    "size": 2.1
+  }
+]

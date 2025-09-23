@@ -64,11 +64,19 @@ const EditTokenModal = (props) => {
   const [groups, setGroups] = useState([]);
   const isEdit = props.editingToken.id !== undefined;
 
+  const formatDateYmd = (d) => {
+    const pad = (n) => (n < 10 ? `0${n}` : `${n}`);
+    const y = d.getFullYear();
+    const m = pad(d.getMonth() + 1);
+    const day = pad(d.getDate());
+    return `${y}${m}${day}`;
+  };
+
   const getInitValues = () => ({
-    name: '',
-    remain_quota: 500000,
+    name: `KEY-[${formatDateYmd(new Date())}]`,
+    remain_quota: 0,
     expired_time: -1,
-    unlimited_quota: false,
+    unlimited_quota: true,
     model_limits_enabled: false,
     model_limits: [],
     allow_ips: '',
@@ -240,7 +248,7 @@ const EditTokenModal = (props) => {
       for (let i = 0; i < count; i++) {
         let { tokenCount: _tc, ...localInputs } = values;
         const baseName =
-          values.name.trim() === '' ? 'default' : values.name.trim();
+          values.name.trim() === '' ? `KEY-[${formatDateYmd(new Date())}]` : values.name.trim();
         if (i !== 0 || values.name.trim() === '') {
           localInputs.name = `${baseName}-${generateRandomSuffix()}`;
         } else {
@@ -482,11 +490,7 @@ const EditTokenModal = (props) => {
                       type='number'
                       disabled={values.unlimited_quota}
                       extraText={renderQuotaWithPrompt(values.remain_quota)}
-                      rules={
-                        values.unlimited_quota
-                          ? []
-                          : [{ required: true, message: t('请输入额度') }]
-                      }
+                      rules={[]}
                       data={[
                         { value: 500000, label: '1$' },
                         { value: 5000000, label: '10$' },

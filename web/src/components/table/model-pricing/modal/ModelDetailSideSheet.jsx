@@ -18,7 +18,8 @@ For commercial licensing, please contact support@quantumnous.com
 */
 
 import React from 'react';
-import { SideSheet, Typography, Button } from '@douyinfe/semi-ui';
+import { SideSheet, Typography, Button, Card, Avatar } from '@douyinfe/semi-ui';
+import { IconLink } from '@douyinfe/semi-icons';
 import { IconClose } from '@douyinfe/semi-icons';
 
 import { useIsMobile } from '../../../../hooks/common/useIsMobile';
@@ -70,7 +71,7 @@ const ModelDetailSideSheet = ({
       }
       onCancel={onClose}
     >
-      <div className='p-2'>
+      <div className='p-3 md:p-5 space-y-4 md:space-y-5'>
         {!modelData && (
           <div className='flex justify-center items-center py-10'>
             <Text type='secondary'>{t('加载中...')}</Text>
@@ -83,6 +84,58 @@ const ModelDetailSideSheet = ({
               vendorsMap={vendorsMap}
               t={t}
             />
+            {/* API 地址卡片（来自 localStorage.status 的 api_info 列表） */}
+            {(() => {
+              let apiInfo = [];
+              try {
+                const raw = localStorage.getItem('status');
+                if (raw) {
+                  const parsed = JSON.parse(raw);
+                  if (Array.isArray(parsed?.api_info)) apiInfo = parsed.api_info;
+                }
+              } catch (_) {}
+              if (!Array.isArray(apiInfo) || apiInfo.length === 0) return null;
+              return (
+                <Card className='!rounded-xl !shadow-none !border' style={{ borderColor: 'rgba(0,0,0,0.06)' }}>
+                  <div className='mb-3'>
+                    <div className='flex items-center gap-2 mb-1'>
+                      <div
+                        className='w-6 h-6 rounded-full flex items-center justify-center'
+                        style={{
+                          background:
+                            'linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(34,197,94,0.15) 100%)',
+                          border: '1px solid rgba(0,0,0,0.06)'
+                        }}
+                      >
+                        <IconLink />
+                      </div>
+                      <Text className='text-base font-semibold'>{t('API地址')}</Text>
+                    </div>
+                    <div className='text-xs text-gray-500'>
+                      {t('可用的 API 路由与访问地址')}
+                    </div>
+                  </div>
+                  <div className='space-y-3'>
+                    {apiInfo.map((api) => (
+                      <div key={api.id} className='p-2 rounded-lg border' style={{ borderColor: 'var(--semi-color-border)' }}>
+                        <div className='flex items-center justify-between gap-2 mb-1'>
+                          <span className='text-sm font-medium break-all'>{api.route}</span>
+                          <Button size='small' onClick={() => navigator.clipboard.writeText(api.url)}>
+                            {t('复制')}
+                          </Button>
+                        </div>
+                        <div className='text-semi-color-primary break-all cursor-pointer hover:underline' onClick={() => navigator.clipboard.writeText(api.url)}>
+                          {api.url}
+                        </div>
+                        {api.description && (
+                          <div className='text-xs text-gray-500 mt-1'>{api.description}</div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              );
+            })()}
             <ModelEndpoints
               modelData={modelData}
               endpointMap={endpointMap}

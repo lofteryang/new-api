@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+
 func GetPricing(c *gin.Context) {
 	pricing := model.GetPricing()
 	userId, exists := c.Get("id")
@@ -70,5 +71,22 @@ func ResetModelRatio(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"success": true,
 		"message": "重置模型倍率成功",
+	})
+}
+
+// GetPricingRecommend 返回推荐模型列表
+func GetPricingRecommend(c *gin.Context) {
+	recommendations := []map[string]interface{}{
+		{
+			"url":       "https://publicfile.m-glass.cn/b03639daaacf351aaadc12fd7f530eea.jpg",
+			"model":     "gemini-2.5-pro",
+			"text":      []string{"帮我做一份简历", "帮我写一份文档"},
+			"modelLogo": "https://publicfile.m-glass.cn/Xnip2025-09-22_11-30-53.png",
+			},
+	}
+
+	c.JSON(200, gin.H{
+		"success": true,
+		"data":    recommendations,
 	})
 }

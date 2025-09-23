@@ -749,9 +749,9 @@ html.dark .with-pastel-balls::before {
 }
 
 .pricing-sidebar {
-  width: clamp(280px, 24vw, 520px) !important;
-  min-width: clamp(280px, 24vw, 520px) !important;
-  max-width: clamp(280px, 24vw, 520px) !important;
+  width: clamp(180px, 16vw, 300px) !important;
+  min-width: clamp(180px, 16vw, 300px) !important;
+  max-width: clamp(180px, 16vw, 300px) !important;
   height: calc(100vh - 60px);
   background-color: var(--semi-color-bg-0);
   overflow: auto;
@@ -789,6 +789,28 @@ html.dark .with-pastel-balls::before {
   overflow: auto;
 }
 
+/* 限制表格超宽导致横向溢出；允许单元格换行 */
+.pricing-view-container .semi-table table {
+  width: 100% !important;
+}
+.pricing-view-container .semi-table td,
+.pricing-view-container .semi-table th {
+  white-space: normal !important;
+  word-break: break-word !important;
+}
+
+/* 模型列表容器：增加左右与整体边框，呈现列表感 */
+.pricing-view-container > div {
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 12px;
+}
+
+/* 列表标题区（search header）底部分界线变为极浅灰，移除阴影 */
+.pricing-search-header {
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  box-shadow: none !important;
+}
+
 .pricing-view-container-mobile {
   flex: 1;
   overflow: auto;
@@ -816,4 +838,9 @@ html.dark .with-pastel-balls::before {
 .semi-button,
 .semi-datepicker-range-input {
   border-radius: 10px !important;
+}
+
+/* 覆盖 semi-layout-content 的默认 margin-top */
+.semi-layout-content {
+  margin-top: 0 !important;
 }

@@ -48,9 +48,16 @@ const PageLayout = () => {
   const { i18n } = useTranslation();
   const location = useLocation();
 
+  // 判断是否为登录或注册页面，这些页面不显示HeaderBar
+  const isAuthPage = location.pathname === '/login' || 
+                     location.pathname === '/register' ||
+                     location.pathname === '/reset';
+  const showHeader = !isAuthPage;
+
   const shouldHideFooter =
     location.pathname.startsWith('/console') ||
-    location.pathname === '/pricing';
+    location.pathname === '/pricing' ||
+    isAuthPage;
 
   const shouldInnerPadding =
     location.pathname.includes('/console') &&
@@ -118,22 +125,24 @@ const PageLayout = () => {
         overflow: isMobile ? 'visible' : 'hidden',
       }}
     >
-      <Header
-        style={{
-          padding: 0,
-          height: 'auto',
-          lineHeight: 'normal',
-          position: 'fixed',
-          width: '100%',
-          top: 0,
-          zIndex: 100,
-        }}
-      >
-        <HeaderBar
-          onMobileMenuToggle={() => setDrawerOpen((prev) => !prev)}
-          drawerOpen={drawerOpen}
-        />
-      </Header>
+      {showHeader && (
+        <Header
+          style={{
+            padding: 0,
+            height: 'auto',
+            lineHeight: 'normal',
+            position: 'fixed',
+            width: '100%',
+            top: 0,
+            zIndex: 100,
+          }}
+        >
+          <HeaderBar
+            onMobileMenuToggle={() => setDrawerOpen((prev) => !prev)}
+            drawerOpen={drawerOpen}
+          />
+        </Header>
+      )}
       <Layout
         style={{
           overflow: isMobile ? 'visible' : 'auto',
@@ -146,11 +155,11 @@ const PageLayout = () => {
             style={{
               position: 'fixed',
               left: 0,
-              top: '64px',
+              top: showHeader ? '64px' : '0',
               zIndex: 99,
               border: 'none',
               paddingRight: '0',
-              height: 'calc(100vh - 64px)',
+              height: showHeader ? 'calc(100vh - 64px)' : '100vh',
               width: 'var(--sidebar-current-width)',
             }}
           >
@@ -180,6 +189,7 @@ const PageLayout = () => {
               WebkitOverflowScrolling: 'touch',
               padding: shouldInnerPadding ? (isMobile ? '5px' : '24px') : '0',
               position: 'relative',
+              marginTop: showHeader ? '64px' : '0',
             }}
           >
             <App />

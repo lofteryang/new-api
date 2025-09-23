@@ -18,8 +18,8 @@ For commercial licensing, please contact support@quantumnous.com
 */
 
 import React from 'react';
-import { Card, Avatar, Typography, Tag, Space } from '@douyinfe/semi-ui';
-import { IconInfoCircle } from '@douyinfe/semi-icons';
+import { Card, Typography, Tag, Space } from '@douyinfe/semi-ui';
+import { Info } from 'lucide-react';
 import { stringToColor } from '../../../../../helpers';
 
 const { Text } = Typography;
@@ -58,24 +58,29 @@ const ModelBasicInfo = ({ modelData, vendorsMap = {}, t }) => {
   };
 
   return (
-    <Card className='!rounded-2xl shadow-sm border-0 mb-6'>
-      <div className='flex items-center mb-4'>
-        <Avatar size='small' color='blue' className='mr-2 shadow-md'>
-          <IconInfoCircle size={16} />
-        </Avatar>
-        <div>
-          <Text className='text-lg font-medium'>{t('基本信息')}</Text>
-          <div className='text-xs text-gray-600'>
-            {t('模型的详细描述和基本特性')}
+    <Card className='!rounded-xl !shadow-none !border' style={{ borderColor: 'rgba(0,0,0,0.06)' }}>
+      <div className='mb-3'>
+        <div className='flex items-center gap-2 mb-1'>
+          <div
+            className='w-6 h-6 rounded-full flex items-center justify-center'
+            style={{
+              background:
+                'linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(147,51,234,0.15) 100%)',
+              border: '1px solid rgba(0,0,0,0.06)'
+            }}
+          >
+            <Info size={14} className='text-blue-500' />
           </div>
+          <Text className='text-base font-semibold'>{t('基本信息')}</Text>
         </div>
+        <div className='text-xs text-gray-500'>{t('模型的详细描述和基本特性')}</div>
       </div>
-      <div className='text-gray-600'>
-        <p className='mb-4'>{getModelDescription()}</p>
+      <div className='text-gray-700 leading-6 text-sm'>
+        <p className='mb-3'>{getModelDescription()}</p>
         {getModelTags().length > 0 && (
           <Space wrap>
             {getModelTags().map((tag, index) => (
-              <Tag key={index} color={tag.color} shape='circle' size='small'>
+              <Tag key={index} color='white' style={{ borderColor: 'rgba(0,0,0,0.06)' }} size='small'>
                 {tag.text}
               </Tag>
             ))}

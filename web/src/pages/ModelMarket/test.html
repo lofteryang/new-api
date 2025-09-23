@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>火山方舟 - API接入指南</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(90deg, #2c3e50 0%, #4a6580 100%);
+            color: white;
+            padding: 25px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+            color: #ff7e42;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #ff7e42;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #ff6a28;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f4f8;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title .number {
+            background: #ff7e42;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        
+        .info-box {
+            background: #f9fafc;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ff7e42;
+        }
+        
+        .info-box p {
+            color: #5a6c82;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+        }
+        
+        thead {
+            background: #f0f4f8;
+        }
+        
+        th {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #f0f4f8;
+        }
+        
+        tbody tr:hover {
+            background: #f9fafc;
+        }
+        
+        .api-key {
+            font-family: monospace;
+            font-size: 16px;
+            color: #ff7e42;
+        }
+        
+        .masked {
+            color: #aaa;
+        }
+        
+        .create-key-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: #ff7e42;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .create-key-btn:hover {
+            background: #ff6a28;
+        }
+        
+        .code-block {
+            background: #2c3e50;
+            color: #f8f8f2;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .optional-badge {
+            background: #e4edf5;
+            color: #4a6580;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #7a8ca0;
+            font-size: 14px;
+            border-top: 1px solid #f0f4f8;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .header-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-rocket logo-icon"></i>
+                <h1>火山方舟 API 接入指南</h1>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-outline">控制台</button>
+                <button class="btn btn-primary">文档</button>
+            </div>
+        </header>
+        
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="number">1</span>
+                    STEP 1 获取 API KEY
+                </h2>
+                
+                <div class="info-box">
+                    <p>API Key 是访问火山方舟大模型服务的重要凭证，长期有效。请妥善保管并定期更换密钥，避免公开共享，以防安全风险和资金损失。</p>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>API Key</th>
+                            <th>创建人</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>api-key-20250219115005</td>
+                            <td><span class="api-key">**********@</span></td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <button class="create-key-btn">
+                    <i class="fas fa-plus-circle"></i>
+                    创建 API Key
+                </button>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="number">2</span>
+                    STEP 2 快速接入测试
+                </h2>
+                
+                <div class="info-box">
+                    <p>使用以下代码示例快速测试 API 接入，将 YOUR_API_KEY 替换为您的实际 API 密钥。</p>
+                </div>
+                
+                <div class="code-block">
+                    <pre><code># 火山方舟 API 请求示例
+import requests
+
+url = "https://api.volcengine.com/v1/chat/completions"
+headers = {
+    "Authorization": "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json"
+}
+data = {
+    "model": "your_model_name",
+    "messages": [
+        {"role": "user", "content": "你好，请介绍一下你自己"}
+    ]
+}
+
+response = requests.post(url, json=data, headers=headers)
+print(response.json())</code></pre>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="number">3</span>
+                    STEP 3 创建应用
+                    <span class="optional-badge">可选</span>
+                </h2>
+                
+                <div class="info-box">
+                    <p>创建应用可以帮助您更好地管理和跟踪 API 使用情况，设置访问权限和限制。</p>
+                </div>
+                
+                <div class="code-block">
+                    <pre><code># 创建应用示例代码
+# 此步骤为可选，您可以直接使用API Key调用服务
+
+# 使用控制台创建应用：
+# 1. 登录火山方舟控制台
+# 2. 进入"应用管理"页面
+# 3. 点击"创建应用"
+# 4. 填写应用信息并保存</code></pre>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2025 火山方舟 - 提供专业的大模型API服务</p>
+        </footer>
+    </div>
+
+    <script>
+        // 简单的交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const createKeyBtn = document.querySelector('.create-key-btn');
+            
+            createKeyBtn.addEventListener('click', function() {
+                alert('即将跳转到API Key创建页面...');
+                // 实际应用中这里会跳转到创建页面
+            });
+            
+            // 表格行点击效果
+            const tableRows = document.querySelectorAll('tbody tr');
+            tableRows.forEach(row => {
+                row.addEventListener('click', function() {
+                    alert('已选择API Key: ' + this.cells[0].textContent);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

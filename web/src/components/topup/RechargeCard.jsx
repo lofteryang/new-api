@@ -383,12 +383,14 @@ const RechargeCard = ({
           ) : (
             <Banner
               type='info'
-              description={t(
-                '管理员未开启在线充值功能，请联系管理员开启或使用兑换码充值。',
-              )}
               className='!rounded-xl'
               closeIcon={null}
-            />
+            >
+              <div className='space-y-2'>
+                <div>1、线下充值：联系您的客户经理进行对公转账后进行人工充值</div>
+                <div>2、自助充值：点击下方获取兑换码，进行自助充值</div>
+              </div>
+            </Banner>
           )}
         </Card>
 
@@ -426,23 +428,30 @@ const RechargeCard = ({
               }
               showClear
               style={{ width: '100%' }}
-              extraText={
-                topUpLink && (
-                  <Text type='tertiary'>
-                    {t('在找兑换码？')}
-                    <Text
-                      type='secondary'
-                      underline
-                      className='cursor-pointer'
-                      onClick={openTopUpLink}
-                    >
-                      {t('购买兑换码')}
-                    </Text>
-                  </Text>
-                )
-              }
             />
           </Form>
+          
+          {/* 购买兑换码按钮 */}
+          {topUpLink && (
+            <div className='mt-4 flex justify-center'>
+              <Button
+                type='primary'
+                theme='solid'
+                size='large'
+                onClick={openTopUpLink}
+                className='!px-8 !py-3 !text-lg !font-semibold !rounded-xl'
+                style={{
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  border: 'none',
+                  boxShadow: '0 4px 15px 0 rgba(102, 126, 234, 0.4)',
+                  minWidth: '200px',
+                  height: '50px'
+                }}
+              >
+                {t('立即购买兑换码')}
+              </Button>
+            </div>
+          )}
         </Card>
       </Space>
     </Card>

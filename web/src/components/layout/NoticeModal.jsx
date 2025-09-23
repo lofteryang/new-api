@@ -20,7 +20,7 @@ For commercial licensing, please contact support@quantumnous.com
 import React, { useEffect, useState, useContext, useMemo } from 'react';
 import {
   Button,
-  Modal,
+  SideSheet,
   Empty,
   Tabs,
   TabPane,
@@ -209,10 +209,10 @@ const NoticeModal = ({
   };
 
   return (
-    <Modal
+    <SideSheet
       title={
         <div className='flex items-center justify-between w-full'>
-          <span>{t('系统公告')}</span>
+          <span>{t('消息')}</span>
           <Tabs activeKey={activeTab} onChange={setActiveTab} type='button'>
             <TabPane
               tab={
@@ -233,22 +233,23 @@ const NoticeModal = ({
           </Tabs>
         </div>
       }
+      placement='right'
+      width={isMobile ? '100%' : 520}
       visible={visible}
       onCancel={onClose}
       footer={
-        <div className='flex justify-end'>
-          <Button type='secondary' onClick={handleCloseTodayNotice}>
-            {t('今日关闭')}
+        <div className='flex justify-end w-full'>
+          <Button type='tertiary' onClick={handleCloseTodayNotice}>
+            {t('今日不再提示')}
           </Button>
-          <Button type='primary' onClick={onClose}>
-            {t('关闭公告')}
+          <Button theme='solid' onClick={onClose}>
+            {t('关闭')}
           </Button>
         </div>
       }
-      size={isMobile ? 'full-width' : 'large'}
     >
       {renderBody()}
-    </Modal>
+    </SideSheet>
   );
 };
 

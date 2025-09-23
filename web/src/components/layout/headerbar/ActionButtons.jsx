@@ -20,7 +20,7 @@ For commercial licensing, please contact support@quantumnous.com
 import React from 'react';
 import NewYearButton from './NewYearButton';
 import NotificationButton from './NotificationButton';
-import ThemeToggle from './ThemeToggle';
+// import ThemeToggle from './ThemeToggle';
 import LanguageSelector from './LanguageSelector';
 import UserArea from './UserArea';
 
@@ -39,6 +39,7 @@ const ActionButtons = ({
   logout,
   navigate,
   t,
+  isHomePage,
 }) => {
   return (
     <div className='flex items-center gap-2 md:gap-3'>
@@ -48,14 +49,18 @@ const ActionButtons = ({
         unreadCount={unreadCount}
         onNoticeOpen={onNoticeOpen}
         t={t}
+        isHomePage={isHomePage}
       />
 
-      <ThemeToggle theme={theme} onThemeToggle={onThemeToggle} t={t} />
+      {/* 移除主题切换按钮 */}
+
+      {/* 控制台按钮（已移除） */}
 
       <LanguageSelector
         currentLang={currentLang}
         onLanguageChange={onLanguageChange}
         t={t}
+        isHomePage={isHomePage}
       />
 
       <UserArea
@@ -66,6 +71,7 @@ const ActionButtons = ({
         logout={logout}
         navigate={navigate}
         t={t}
+        isHomePage={isHomePage}
       />
     </div>
   );

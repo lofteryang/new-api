@@ -42,7 +42,7 @@ const routerMap = {
   setting: '/console/setting',
   about: '/about',
   detail: '/console',
-  pricing: '/pricing',
+  pricing: '/console/pricing',
   task: '/console/task',
   models: '/console/models',
   playground: '/console/playground',
@@ -83,6 +83,11 @@ const SiderBar = ({ onNavigate = () => {} }) => {
         to: '/token',
       },
       {
+        text: t('模型广场'),
+        itemKey: 'pricing',
+        to: '/pricing',
+      },
+      {
         text: t('使用日志'),
         itemKey: 'log',
         to: '/log',
@@ -107,6 +112,10 @@ const SiderBar = ({ onNavigate = () => {} }) => {
 
     // 根据配置过滤项目
     const filteredItems = items.filter((item) => {
+      // 模型广场按钮始终显示，不受配置过滤影响
+      if (item.itemKey === 'pricing') {
+        return true;
+      }
       const configVisible = isModuleVisible('console', item.itemKey);
       return configVisible;
     });
@@ -482,34 +491,37 @@ const SiderBar = ({ onNavigate = () => {} }) => {
         <SkeletonWrapper
           loading={showSkeleton}
           type='button'
-          width={collapsed ? 36 : 156}
-          height={24}
-          className='w-full'
+          width={40}
+          height={40}
+          className='flex justify-center'
         >
           <Button
             theme='outline'
             type='tertiary'
-            size='small'
+            size='large'
             icon={
               <ChevronLeft
-                size={16}
+                size={20}
                 strokeWidth={2.5}
-                color='var(--semi-color-text-2)'
+                color='var(--semi-color-text-1)'
                 style={{
                   transform: collapsed ? 'rotate(180deg)' : 'rotate(0deg)',
+                  transition: 'transform 0.2s ease',
                 }}
               />
             }
             onClick={toggleCollapsed}
-            icononly={collapsed}
-            style={
-              collapsed
-                ? { width: 36, height: 24, padding: 0 }
-                : { padding: '4px 12px', width: '100%' }
-            }
-          >
-            {!collapsed ? t('收起侧边栏') : null}
-          </Button>
+            icononly={true}
+            style={{
+              width: 40,
+              height: 40,
+              padding: 0,
+              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          />
         </SkeletonWrapper>
       </div>
     </div>

@@ -24,6 +24,7 @@ import {
   useState,
   useEffect,
 } from 'react';
+import { useRouteBasedTheme } from '../../hooks/common/useRouteBasedTheme';
 
 const ThemeContext = createContext(null);
 export const useTheme = () => useContext(ThemeContext);
@@ -54,9 +55,33 @@ export const ThemeProvider = ({ children }) => {
   });
 
   const [systemTheme, setSystemTheme] = useState(getSystemTheme());
+  const [routeBasedTheme, setRouteBasedTheme] = useState(null);
 
-  // 计算实际应用的主题
-  const actualTheme = theme === 'auto' ? systemTheme : theme;
+  // 设置主题的函数
+  const setTheme = useCallback((newTheme) => {
+    let themeValue;
+
+    if (typeof newTheme === 'boolean') {
+      // 向后兼容原有的 boolean 参数
+      themeValue = newTheme ? 'dark' : 'light';
+    } else if (typeof newTheme === 'string') {
+      // 新的字符串参数支持 'light', 'dark', 'auto'
+      themeValue = newTheme;
+    } else {
+      themeValue = 'auto';
+    }
+
+    _setTheme(themeValue);
+    localStorage.setItem('theme-mode', themeValue);
+  }, []);
+
+  // 使用路由基础主题 hook
+  const { isHomePage } = useRouteBasedTheme((forcedTheme) => {
+    setRouteBasedTheme(forcedTheme);
+  }, theme);
+
+  // 计算实际应用的主题 - 优先使用路由强制主题
+  const actualTheme = routeBasedTheme || (theme === 'auto' ? systemTheme : theme);
 
   // 监听系统主题变化
   useEffect(() => {
@@ -87,22 +112,6 @@ export const ThemeProvider = ({ children }) => {
     }
   }, [actualTheme]);
 
-  const setTheme = useCallback((newTheme) => {
-    let themeValue;
-
-    if (typeof newTheme === 'boolean') {
-      // 向后兼容原有的 boolean 参数
-      themeValue = newTheme ? 'dark' : 'light';
-    } else if (typeof newTheme === 'string') {
-      // 新的字符串参数支持 'light', 'dark', 'auto'
-      themeValue = newTheme;
-    } else {
-      themeValue = 'auto';
-    }
-
-    _setTheme(themeValue);
-    localStorage.setItem('theme-mode', themeValue);
-  }, []);
 
   return (
     <SetThemeContext.Provider value={setTheme}>

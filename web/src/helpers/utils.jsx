@@ -48,7 +48,7 @@ export function isRoot() {
 
 export function getSystemName() {
   let system_name = localStorage.getItem('system_name');
-  if (!system_name) return 'New API';
+  if (!system_name) return '原能引擎 - 新一代AI云算力服务商';
   return system_name;
 }
 
@@ -753,7 +753,7 @@ const DEFAULT_PRICING_FILTERS = {
   showWithRecharge: false,
   currency: 'USD',
   showRatio: false,
-  viewMode: 'card',
+  viewMode: 'table',
   tokenUnit: 'M',
   filterGroup: 'all',
   filterQuotaType: 'all',

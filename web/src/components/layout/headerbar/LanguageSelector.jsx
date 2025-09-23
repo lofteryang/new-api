@@ -19,7 +19,7 @@ For commercial licensing, please contact support@quantumnous.com
 
 import React from 'react';
 import { Button, Dropdown } from '@douyinfe/semi-ui';
-import { Languages } from 'lucide-react';
+// import { Languages } from 'lucide-react';
 import { CN, GB } from 'country-flag-icons/react/3x2';
 
 const LanguageSelector = ({ currentLang, onLanguageChange, t }) => {
@@ -46,12 +46,13 @@ const LanguageSelector = ({ currentLang, onLanguageChange, t }) => {
       }
     >
       <Button
-        icon={<Languages size={18} />}
         aria-label={t('切换语言')}
         theme='borderless'
         type='tertiary'
-        className='!p-1.5 !text-current focus:!bg-semi-color-fill-1 dark:focus:!bg-gray-700 !rounded-full !bg-semi-color-fill-0 dark:!bg-semi-color-fill-1 hover:!bg-semi-color-fill-1 dark:hover:!bg-semi-color-fill-2'
-      />
+        className='!px-2 !py-1 !rounded-none !bg-transparent hover:!bg-transparent !text-sm'
+      >
+        {currentLang === 'en' ? 'English' : '中文'}
+      </Button>
     </Dropdown>
   );
 };

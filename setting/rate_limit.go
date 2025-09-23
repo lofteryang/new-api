@@ -10,8 +10,8 @@ import (
 
 var ModelRequestRateLimitEnabled = false
 var ModelRequestRateLimitDurationMinutes = 1
-var ModelRequestRateLimitCount = 0
-var ModelRequestRateLimitSuccessCount = 1000
+var ModelRequestRateLimitCount = 100000
+var ModelRequestRateLimitSuccessCount = 100000
 var ModelRequestRateLimitGroup = map[string][2]int{}
 var ModelRequestRateLimitMutex sync.RWMutex
 

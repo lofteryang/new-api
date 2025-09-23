@@ -19,7 +19,8 @@ For commercial licensing, please contact support@quantumnous.com
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Typography, Tag } from '@douyinfe/semi-ui';
+import { Typography, Tag, Button } from '@douyinfe/semi-ui';
+import { LayoutDashboard } from 'lucide-react';
 import SkeletonWrapper from '../components/SkeletonWrapper';
 
 const HeaderLogo = ({
@@ -31,6 +32,7 @@ const HeaderLogo = ({
   systemName,
   isSelfUseMode,
   isDemoSiteMode,
+  isHomePage,
   t,
 }) => {
   if (isMobile && isConsoleRoute) {
@@ -39,41 +41,45 @@ const HeaderLogo = ({
 
   return (
     <Link to='/' className='group flex items-center gap-2'>
-      <div className='relative w-8 h-8 md:w-8 md:h-8'>
-        <SkeletonWrapper loading={isLoading || !logoLoaded} type='image' />
-        <img
-          src={logo}
-          alt='logo'
-          className={`absolute inset-0 w-full h-full transition-all duration-200 group-hover:scale-110 rounded-full ${!isLoading && logoLoaded ? 'opacity-100' : 'opacity-0'}`}
-        />
+      <div className={`relative h-8 md:h-8 ${isHomePage ? 'ml-4 md:ml-12 lg:ml-[120px] xl:ml-[200px]' : ''}`}>
+        <SkeletonWrapper loading={false} type='image' />
+        {/* 规则：在首页（暗背景）使用无色白标，在其他页面使用彩色标 */}
+        {isHomePage ? (
+          <img
+            src={'/logo-nocolor.svg'}
+            alt='logo'
+            className='block h-8 md:h-8 w-auto object-contain'
+          />
+        ) : (
+          <img
+            src={'/logo-color.svg'}
+            alt='logo'
+            className='block h-8 md:h-8 w-auto object-contain'
+          />
+        )}
       </div>
-      <div className='hidden md:flex items-center gap-2'>
-        <div className='flex items-center gap-2'>
-          <SkeletonWrapper
-            loading={isLoading}
-            type='title'
-            width={120}
-            height={24}
+      {!isHomePage && (
+        <>
+          <span className='hidden md:inline-flex items-center text-sm text-gray-700 ml-2'>
+            <span className='mx-2 text-gray-400'>|</span>
+            新一代AI云算力服务商
+          </span>
+          <Button
+            theme='borderless'
+            type='tertiary'
+            size='small'
+            className='hidden md:inline-flex !px-2 !py-1 !rounded-md !bg-transparent hover:!bg-semi-color-fill-0 ml-2'
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = '/console';
+            }}
+            icon={<LayoutDashboard size={16} />}
           >
-            <Typography.Title
-              heading={4}
-              className='!text-lg !font-semibold !mb-0'
-            >
-              {systemName}
-            </Typography.Title>
-          </SkeletonWrapper>
-          {(isSelfUseMode || isDemoSiteMode) && !isLoading && (
-            <Tag
-              color={isSelfUseMode ? 'purple' : 'blue'}
-              className='text-xs px-1.5 py-0.5 rounded whitespace-nowrap shadow-sm'
-              size='small'
-              shape='circle'
-            >
-              {isSelfUseMode ? t('自用模式') : t('演示站点')}
-            </Tag>
-          )}
-        </div>
-      </div>
+            {t('控制台')}
+          </Button>
+        </>
+      )}
+      {/* 仅显示 Logo：去除系统名与徽标 */}
     </Link>
   );
 };

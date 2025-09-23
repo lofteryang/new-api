@@ -1,0 +1,97 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #000000;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #fff;
+    cursor: default;
+}
+
+#webgl-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+
+#grok-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16vw;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+}
+
+.grok-fade {
+    color: rgba(255, 255, 255, 0.2);
+    filter: blur(1px);
+}
+
+.grok-shine {
+    color: #ffffff;
+    text-shadow:
+        0 0 10px rgba(135, 206, 250, 0.4),
+        0 0 20px rgba(135, 206, 250, 0.3),
+        0 0 30px rgba(135, 206, 250, 0.2),
+        0 0 40px rgba(135, 206, 250, 0.1);
+}
+
+#chat-input-container {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    background-color: rgba(34, 34, 34, 0.85);
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+#chat-input-container:focus-within {
+    box-shadow: 0 0 15px rgba(135, 206, 250, 0.5),
+                0 0 30px rgba(135, 206, 250, 0.2);
+}
+
+#chat-input {
+    flex-grow: 1;
+    border: none;
+    background: none;
+    color: #ffffff;
+    font-size: 1.1em;
+    padding: 0;
+    margin-right: 15px;
+    outline: none;
+}
+
+#chat-input::placeholder {
+    color: #aaaaaa;
+    opacity: 0.8;
+}
+
+#send-button {
+    width: 28px;
+    height: 28px;
+    background-color: rgba(135, 206, 250, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#send-button:hover {
+    background-color: rgba(135, 206, 250, 0.6);
+} 

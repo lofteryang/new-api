@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grok</title>
+    <link rel="stylesheet" href="grok-style.css">
+</head>
+<body>
+    <!-- 背景 WebGL Canvas 容器 -->
+    <div id="webgl-container"></div>
+
+    <!-- Kyber Core 标题文字 -->
+    <div id="grok-title">
+        <span class="grok-fade">Kyber </span><span class="grok-shine">Core</span>
+    </div>
+
+    <!-- 底部输入框容器 -->
+    <div id="chat-input-container">
+        <input type="text" id="chat-input" placeholder="What do you want to know?">
+        <div id="send-button"></div>
+    </div>
+
+    <!-- 引入 Three.js 库 (CDN) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.158.0/three.min.js"></script>
+    <!-- 引入自定义 JavaScript 逻辑 -->
+    <script src="grok-script.js"></script>
+</body>
+</html>
