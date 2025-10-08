@@ -60,7 +60,10 @@ func SetApiRouter(router *gin.Engine) {
 				selfRoute.PUT("/self", controller.UpdateSelf)
 				selfRoute.DELETE("/self", controller.DeleteSelf)
 				selfRoute.GET("/token", controller.GenerateAccessToken)
-				selfRoute.GET("/aff", controller.GetAffCode)
+                selfRoute.GET("/aff", controller.GetAffCode)
+                // 使用 /self/invite 避免与 /:id 路由冲突
+                selfRoute.GET("/self/invite", controller.GetInviteUsers)
+                selfRoute.GET("/self/invite/:inviteeId/topups", controller.GetInviteeTopups)
 				selfRoute.GET("/topup/info", controller.GetTopUpInfo)
 				selfRoute.POST("/topup", middleware.CriticalRateLimit(), controller.TopUp)
 				selfRoute.POST("/pay", middleware.CriticalRateLimit(), controller.RequestEpay)

@@ -47,6 +47,7 @@ const routerMap = {
   models: '/console/models',
   playground: '/console/playground',
   personal: '/console/personal',
+  invite: '/console/invite',
 };
 
 const SiderBar = ({ onNavigate = () => {} }) => {
@@ -137,6 +138,11 @@ const SiderBar = ({ onNavigate = () => {} }) => {
         to: '/topup',
       },
       {
+        text: t('我的邀请'),
+        itemKey: 'invite',
+        to: '/invite',
+      },
+      {
         text: t('个人设置'),
         itemKey: 'personal',
         to: '/personal',
@@ -145,6 +151,10 @@ const SiderBar = ({ onNavigate = () => {} }) => {
 
     // 根据配置过滤项目
     const filteredItems = items.filter((item) => {
+      // “我的邀请”始终显示（不受配置隐藏）
+      if (item.itemKey === 'invite') {
+        return true;
+      }
       const configVisible = isModuleVisible('personal', item.itemKey);
       return configVisible;
     });
@@ -459,7 +469,7 @@ const SiderBar = ({ onNavigate = () => {} }) => {
           )}
 
           {/* 个人中心区域 */}
-          {hasSectionVisibleModules('personal') && (
+          {(hasSectionVisibleModules('personal') || financeItems.length > 0) && (
             <>
               <Divider className='sidebar-divider' />
               <div>

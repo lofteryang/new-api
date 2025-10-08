@@ -45,6 +45,7 @@ import ModelPage from './pages/Model';
 import Playground from './pages/Playground';
 import OAuth2Callback from './components/auth/OAuth2Callback';
 import PersonalSetting from './components/settings/PersonalSetting';
+import Invite from './pages/Invite';
 import Setup from './pages/Setup';
 import SetupCheck from './components/layout/SetupCheck';
 import ModelMarket from './pages/ModelMarket';
@@ -224,6 +225,14 @@ function App() {
               <Suspense fallback={<Loading></Loading>} key={location.pathname}>
                 <PersonalSetting />
               </Suspense>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/console/invite'
+          element={
+            <PrivateRoute>
+              <Invite />
             </PrivateRoute>
           }
         />
